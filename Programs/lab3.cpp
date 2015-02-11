@@ -59,7 +59,7 @@ public:
 class Controller {
 public:
     Controller() {
-        model = new Model(2,4);
+        model = new Model(4,4);
         view = new View;
     }
     ~Controller() {
@@ -132,6 +132,8 @@ bool Model::valid(int row, int column) {
 	if (row > getHeight())
 		return false;
 	if (column > getWidth())
+		return false;
+	if (visible[row][column] == '*')
 		return false;
 	else
     return true;
