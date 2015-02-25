@@ -1,4 +1,5 @@
 #include <vector>
+#include <iostream>
 
 #ifndef _MODEL_H
 #define _MODEL_H
@@ -26,6 +27,7 @@ public:
     void flip(int row, int column);
     // Is the game over?
     bool gameOver();
+	int check();
 private:
     // Is the row/column valid?
     bool valid(int row, int column);
@@ -40,9 +42,11 @@ private:
     int width;
     // What's the height?
     int height;
+	char hold;
+	int count;
     // What'd we flip last?
-    std::vector<int> lastRow;
-    std::vector<int> lastColumn;
+    vector<int> lastRow;
+    vector<int> lastColumn;
     State state;
 };
 

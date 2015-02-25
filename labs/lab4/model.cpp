@@ -3,12 +3,13 @@
 #include <ctime>
 
 using namespace std;
+enum State {Initial, One, NoMatch};
 
 // Constructor initializes the object
 Model::Model(int w, int h) {
     width = w;
     height = h;
-    state = INIT;
+    state = Initial;
     grid = new char*[height];
     visible = new char*[height];
     // For every row, create the array for that row
@@ -61,16 +62,61 @@ Model::~Model() {
 // That is, is the row within the height, and is the column within the width?
 // Return whether it is or isn't.
 bool Model::valid(int row, int column) {
+  if (row > getHeight())
+		return false;
+	if (column > getWidth())
+		return false;
+	else
     return true;
 }
 bool Model::matched(int row, int column) {
-    return true;
+    if (grid[row][column] == grid[lastRow][lastColumn])
+		return true;
+	else 
+		return false;
 }
 // TODO: Flip a cell
 void Model::flip(int row, int column) {
     // If the row and column are not valid, break out and don't do anything
-    if (!valid(row, column)) { return; }
-    visible[row][column] = grid[row][column];
+   if (!valid(row, column)) { 
+	return; }
+	switch(state){
+		case Initial:
+		visible[row][column] = grid[row][column];
+		break;
+		
+	}
+	
+	/*int state;
+	visible[row][column] = grid[row][column];
+	state = check();
+	if (state == 0)
+	{
+		if (matched(row, column) == true)
+		{
+			visible[row][column] = grid[row][column];
+			visible[lastRow][lastColumn] = grid[lastRow][lastColumn];
+		}
+		if (matched(row, column) == false)
+		{
+			visible[row][column] = '_';
+			visible[lastRow][lastColumn] = '_';
+		}
+	}
+	if (state == 1){
+	lastColumn = column;
+	lastRow = row;
+	}*/
+}
+int Model::check(){
+	int num;
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+			if (visible[i][j] == grid[i][j])
+				num++;
+	}
+	return num%2;
 }
 // If everything is visible, then it's game over
 bool Model::gameOver() {

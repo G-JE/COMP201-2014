@@ -160,7 +160,9 @@ void Model::show(){
 // TODO: Flip a cell
 void Model::flip(int row, int column) {
     // If the row and column are not valid, break out and don't do anything
-    if (!valid(row, column)) { return; }
+    if (!valid(row, column)) { 
+	cout << "Invalid Input!\n";
+	return; }
 	int state;
     hold = grid[row][column];
 	visible[row][column] = grid[row][column];

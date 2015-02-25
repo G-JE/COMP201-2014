@@ -74,7 +74,6 @@ int main()
 			cout << "Invalid Input!" << endl;
 	}
 	
-	
 	return 0;
 }
 
